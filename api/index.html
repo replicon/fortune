@@ -342,10 +342,24 @@ https://github.com/fortunejs/fortune/tree/master/website
         --><!--
       --><a href="#serializer-id" class="anchor">#</a></h2><p>A serializer must have a static property <code>id</code>. This should be informative and functional, such as a media type. <strong>MUST</strong> be a primitive type.</p><hr><h6>Net <span>(<a href="https://github.com/fortunejs/fortune/blob/master/lib/net&#x2F;http.js">net&#x2F;http.js</a>)</span></h6><h2 id="net-http">Net.<span class="key">http</span><!--
         --><!--
-          -->(<span class="parameter" title="Fortune">instance</span>)<!--
+          -->(<span class="parameter" title="Fortune">instance</span>, <span class="parameter" title="Object">[options]</span>)<!--
         --><!--
         --><!--
         --><span class="arrow">⇒</span><!--
         --><span class="return">Function</span><!--
         --><!--
-      --><a href="#net-http" class="anchor">#</a></h2><p>This function maps HTTP on to Fortune, it&#39;s a static method available at <code>Fortune.net.http</code>. The only integration it has with Fortune is passing in which serializers to use and reading the request body, and mapping the response from the <code>request</code> method on to the HTTP response. The listener function ends the response and returns a promise that is resolved when the response is ended. The returned promise may be rejected with the error response, providing a hook for error logging.</p><hr></div></article><footer><p><a href="https://raw.githubusercontent.com/fortunejs/fortune/master/LICENSE">MIT License</a></p></footer></section></main></body></html>
+      --><a href="#net-http" class="anchor">#</a></h2><p>This function maps HTTP on to Fortune, it&#39;s a static method available at <code>Fortune.net.http</code>. The integration with Fortune is minimal, passing in which serializers to use, assigning request headers to the <code>meta</code> object, and reading the request body, and mapping the response from the <code>request</code> method on to the HTTP response. If the payload is an object, it will be cast into a JSON string. The listener function ends the response and returns a promise that is resolved when the response is ended. The returned promise may be rejected with the error response, providing a hook for error logging.</p><p>The options object may be formatted as follows:</p><pre><code class="lang-js">{
+  <span class="hljs-comment">// By default, the listener will end the response, set this to `true` if</span>
+  <span class="hljs-comment">// the response will be ended later.</span>
+  <span class="hljs-tag">skipResponse</span>: <span class="hljs-tag">false</span>,
+
+  <span class="hljs-comment">// JSON specific settings.</span>
+  <span class="hljs-tag">json</span>: {
+    <span class="hljs-comment">// How many spaces to indent. For example, use `2` for pretty printing.</span>
+    <span class="hljs-attribute">spaces</span>: <span class="hljs-number">0</span>,
+
+    <span class="hljs-comment">// Character encoding for buffers.</span>
+    <span class="hljs-attribute">bufferEncoding</span>: <span class="hljs-string">'base64'</span>
+  }
+}
+</code></pre><hr></div></article><footer><p><a href="https://raw.githubusercontent.com/fortunejs/fortune/master/LICENSE">MIT License</a></p></footer></section></main></body></html>
